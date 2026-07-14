@@ -88,6 +88,7 @@ load_dataset <- function(data_file) {
 
 pin_seed <- function(fun, args, seed) {
     set.seed(seed)
+    cat(fun, "\n", names(args), "\n", seed, "\n")
     eval(as.call(c(fun, args)))
 }
 
@@ -150,7 +151,13 @@ Ks[Ks < 2] <- 2 ## but we never run k < 2; those are replaced by (extra) k=2 run
 cat('refined Ks grid:  ', Ks, '\n')
 
 
-res <- do_fcps(data = load_dataset(args[['data.matrix']]), method = args[['method']], Ks = Ks, seed = args$seed)
+dataset <- load_dataset(args[['data.matrix']])
+head(dataset)
+dim(dataset)
+
+res <- do_fcps(data = dataset, 
+               method = args[['method']], 
+               Ks = Ks, seed = args$seed)
 
 colnames(res) <- paste0('k=', Ks)
     
