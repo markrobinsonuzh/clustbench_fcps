@@ -98,6 +98,7 @@ pin_seed <- function(fun, args, seed) {
     set.seed(seed)
     print(fun)
     eval(as.call(c(fun, args)))
+    cat("after eval() in pin_seed()\n")
 }
 
 do_fcps <- function(data, Ks, method, seed) {
@@ -122,6 +123,7 @@ do_fcps <- function(data, Ks, method, seed) {
             args <- list(Data=data)        
         
         args <- c(args, ClusterNo=k, case[-1])
+        print(args)
 
         y_pred <- as.integer(pin_seed(fun, args, seed)[['Cls']])
 
