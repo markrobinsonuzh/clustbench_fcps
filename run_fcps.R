@@ -32,6 +32,14 @@ parser$add_argument("--method", "-m", dest="method", type="character", help="met
 args <- parser$parse_args()
 
 
+# logging
+cat(sprintf("Full command: %s\n", paste(commandArgs(trailingOnly = FALSE), collapse = " ")))
+cat(sprintf("LOG: command line args\n----------------------------------\n"))
+for (i in 1:length(args)) {
+  cat(sprintf("  %s: %s\n", names(args)[i], args[[i]]))
+}
+cat(sprintf("----------------------------------\n"))
+
 
 VALID_METHODS <- list(
     # Affinity propagation (Apclustering) - does not allow k
@@ -88,7 +96,7 @@ load_dataset <- function(data_file) {
 
 pin_seed <- function(fun, args, seed) {
     set.seed(seed)
-    cat(fun, "\n", names(args), "\n", seed, "\n")
+    print(fun)
     eval(as.call(c(fun, args)))
 }
 
