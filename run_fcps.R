@@ -123,7 +123,7 @@ do_fcps <- function(data, Ks, method, seed) {
             args <- list(Data=data)        
         
         args <- c(args, ClusterNo=k, case[-1])
-        print(args)
+        print(lapply(args, head))
 
         y_pred <- as.integer(pin_seed(fun, args, seed)[['Cls']])
 
